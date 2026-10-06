@@ -45,9 +45,11 @@ Le panier pourrait être sauvegardé dans localStorage pour survivre à F5
 un service partagé permettrait aussi de le conserver lors des navigations entre les pages, mais ne suffit pas à lui seul pour F5.
 
 ## Question 12 
-un accès direct à une fiche reçoit normalement un code HTTP 404.
-Le fichier 404.html contient l'application Angular, qui démarre et
-affiche la fiche correspondant à l'adresse.
+## Q12
+La requête du document reçoit le code HTTP 404.
+GitHub Pages ne trouve pas de fichier correspondant à cette adresse
+et renvoie 404.html, une copie de l'application Angular.
+Angular démarre puis son routeur affiche la fiche du livre demandé.
 
 ## Question 13
 ## Q13
