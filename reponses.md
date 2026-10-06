@@ -28,10 +28,12 @@ toLowerCase() est appliqué au nom de l'auteur et au texte recherché.
 la recherche ne distingue donc pas les majuscules des miniscules.
 
 ## Question 8 
-sans withComponetInputBinding(), le router ne fournit plus id à l'input du composant.
-la lecture de cet input obligatoire peut déclencher l'erreur NG0950 :
-"Input is required but not value is available yet. "
+Sans withComponentInputBinding(), la console affiche :
+NG0950: Input "id" is required but no value is available yet.
 
+Le routeur ne transmet plus le paramètre id à l'input obligatoire
+du composant Fiche. Lorsque le composant lit cet input pour
+rechercher le livre, Angular déclenche cette erreur.
 ## Question 9 
 Angular réutilise le composant Fiche lorsque seul le paramètre id change.
 le signal ajoute conserve true, donc le bouton reste gris.
