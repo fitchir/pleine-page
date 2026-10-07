@@ -1,0 +1,77 @@
+h1 {
+  margin-bottom: 24px;
+}
+
+.ligne-panier {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.ligne-panier > div {
+  flex: 1;
+}
+
+a {
+  color: #2457a7;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.ligne-panier a {
+  font-weight: 600;
+}
+
+.ligne-panier p {
+  margin: 6px 0 0;
+  color: #666;
+}
+
+.ligne-panier strong {
+  white-space: nowrap;
+}
+
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #2457a7;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #193e78;
+}
+
+button:focus-visible {
+  outline: 3px solid #2457a7;
+  outline-offset: 3px;
+}
+
+.total {
+  margin-top: 24px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+@media (max-width: 600px) {
+  .ligne-panier {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .ligne-panier > div {
+    flex-basis: 100%;
+  }
+
+  .ligne-panier button {
+    margin-left: auto;
+  }
+}

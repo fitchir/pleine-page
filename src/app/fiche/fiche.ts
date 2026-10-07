@@ -1,6 +1,7 @@
-import { Component, computed, input, signal } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LIVRES } from '../livres';
+import { PanierService } from '../panier.service';
 
 @Component({
   selector: 'app-fiche',
@@ -11,14 +12,14 @@ import { LIVRES } from '../livres';
 export class Fiche {
   readonly id = input.required<string>();
 
+  private readonly panier = inject(PanierService);
+
   protected readonly livre = computed(() =>
     LIVRES.find(l => l.id === Number(this.id()))
   );
 
-  protected readonly panier = signal<number[]>([]);
-
   protected readonly ajoute = computed(() =>
-    this.panier().includes(Number(this.id()))
+    this.panier.contient(Number(this.id()))
   );
 
   protected readonly suggestions = computed(() =>
@@ -26,7 +27,7 @@ export class Fiche {
       .slice(0, 4)
   );
 
-  protected ajouter() {
-    this.panier.update(p => [...p, Number(this.id())]);
+  protected ajouter(): void {
+    this.panier.ajouter(Number(this.id()));
   }
 }

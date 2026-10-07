@@ -1,6 +1,8 @@
 .entete {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  gap: 16px;
   padding: 14px 24px;
   background: #1b232d;
 }
@@ -10,8 +12,27 @@
   text-decoration: none;
 }
 
+.entete a:hover {
+  text-decoration: underline;
+}
+
+.compteur {
+  color: #fff;
+}
+
 main {
   max-width: 900px;
   margin: 0 auto;
   padding: 24px;
+}
+
+@media (max-width: 600px) {
+  .entete {
+    flex-wrap: wrap;
+    padding: 14px 16px;
+  }
+
+  main {
+    padding: 16px;
+  }
 }
