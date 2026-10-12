@@ -1,6 +1,6 @@
-import { Component, computed, signal } from '@angular/core';
-import { LIVRES } from '../livres';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { LivresService } from '../livres.service';
 
 @Component({
   selector: 'app-catalogue',
@@ -9,11 +9,15 @@ import { RouterLink } from '@angular/router';
   styleUrl: './catalogue.css'
 })
 export class Catalogue {
+  protected readonly catalogue = inject(LivresService);
+
   protected readonly filtre = signal('');
 
   protected readonly resultats = computed(() =>
-    LIVRES.filter(l =>
-      l.auteur.toLowerCase().includes(this.filtre().toLowerCase())
+    this.catalogue.livres().filter(livre =>
+      livre.auteur
+        .toLowerCase()
+        .includes(this.filtre().toLowerCase())
     )
   );
 }

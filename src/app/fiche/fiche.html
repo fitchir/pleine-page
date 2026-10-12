@@ -1,4 +1,8 @@
-@if (livre(); as l) {
+@if (catalogue.chargement()) {
+  <p>Chargement du livre…</p>
+} @else if (catalogue.erreur(); as message) {
+  <p>{{ message }}</p>
+} @else if (livre(); as l) {
   <div class="livre">
     <div class="couv">{{ l.titre }}</div>
 
@@ -7,23 +11,25 @@
       <p>par {{ l.auteur }}</p>
       <p class="prix">{{ l.prix }} €</p>
 
-        <button
-            [disabled]="ajoute()"
-            (click)="ajouter()"
-        >
-            {{ ajoute() ? 'Ajouté' : 'Ajouter au panier' }}
-        </button>
+      <button
+        type="button"
+        [disabled]="ajoute()"
+        (click)="ajouter()"
+      >
+        {{ ajoute() ? 'Ajouté' : 'Ajouter au panier' }}
+      </button>
     </div>
   </div>
+
   <h2>Vous aimerez aussi</h2>
 
-    <div class="suggestions">
+  <div class="suggestions">
     @for (s of suggestions(); track s.id) {
-        <a [routerLink]="['/livre', s.id]">
+      <a [routerLink]="['/livre', s.id]">
         {{ s.titre }}
-        </a>
+      </a>
     }
-    </div>
+  </div>
 } @else {
   <p>Ce livre n'existe pas.</p>
 }

@@ -1,6 +1,6 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LIVRES } from '../livres';
+import { LivresService } from '../livres.service';
 import { PanierService } from '../panier.service';
 
 @Component({
@@ -12,10 +12,11 @@ import { PanierService } from '../panier.service';
 export class Fiche {
   readonly id = input.required<string>();
 
+  protected readonly catalogue = inject(LivresService);
   private readonly panier = inject(PanierService);
 
   protected readonly livre = computed(() =>
-    LIVRES.find(l => l.id === Number(this.id()))
+    this.catalogue.livres().find(l => l.id === Number(this.id()))
   );
 
   protected readonly ajoute = computed(() =>
@@ -23,11 +24,16 @@ export class Fiche {
   );
 
   protected readonly suggestions = computed(() =>
-    LIVRES.filter(l => l.id !== Number(this.id()))
+    this.catalogue.livres()
+      .filter(l => l.id !== Number(this.id()))
       .slice(0, 4)
   );
 
   protected ajouter(): void {
-    this.panier.ajouter(Number(this.id()));
+    const livre = this.livre();
+
+    if (livre) {
+      this.panier.ajouter(livre.id);
+    }
   }
 }

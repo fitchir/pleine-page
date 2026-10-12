@@ -1,17 +1,26 @@
-import { Injectable, computed, effect, signal } from '@angular/core';
-import { LIVRES } from './livres';
+import {
+  Injectable,
+  computed,
+  effect,
+  inject,
+  signal
+} from '@angular/core';
+import { LivresService } from './livres.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PanierService {
+  private readonly catalogue = inject(LivresService);
   private readonly cle = 'pleine-page-panier';
   private readonly ids = signal<number[]>(this.charger());
 
   readonly nombre = computed(() => this.ids().length);
 
   readonly livres = computed(() =>
-    LIVRES.filter(livre => this.ids().includes(livre.id))
+    this.catalogue.livres().filter(livre =>
+      this.ids().includes(livre.id)
+    )
   );
 
   readonly total = computed(() =>
@@ -35,7 +44,9 @@ export class PanierService {
   }
 
   retirer(id: number): void {
-    this.ids.update(ids => ids.filter(livreId => livreId !== id));
+    this.ids.update(ids =>
+      ids.filter(livreId => livreId !== id)
+    );
   }
 
   vider(): void {
