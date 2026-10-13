@@ -1,34 +1,81 @@
-<h1>Mon panier</h1>
+<a class="retour" routerLink="/">← Continuer la découverte</a>
+
+<div class="titre-page">
+  <span class="eyebrow">VOTRE SÉLECTION</span>
+  <h1>Des histoires à emporter.</h1>
+  <p>Retrouvez ici les livres que vous avez choisis.</p>
+</div>
 
 @if (panier.livres().length > 0) {
-  @for (livre of panier.livres(); track livre.id) {
-    <article class="ligne-panier">
-      <div>
-        <a [routerLink]="['/livre', livre.id]">
-          {{ livre.titre }}
-        </a>
-        <p>{{ livre.auteur }}</p>
+  <div class="disposition">
+    <section class="liste" aria-label="Livres du panier">
+      @for (livre of panier.livres(); track livre.id) {
+        <article class="ligne-panier">
+          <a
+            class="mini-livre"
+            [routerLink]="['/livre', livre.id]"
+            [attr.aria-label]="'Voir ' + livre.titre"
+          >
+            <span>{{ livre.titre }}</span>
+            <span class="motif" aria-hidden="true"></span>
+          </a>
+
+          <div class="details">
+            <span class="auteur">{{ livre.auteur }}</span>
+            <h2>
+              <a [routerLink]="['/livre', livre.id]">
+                {{ livre.titre }}
+              </a>
+            </h2>
+
+            <button
+              class="retirer"
+              type="button"
+              [attr.aria-label]="'Retirer ' + livre.titre"
+              (click)="panier.retirer(livre.id)"
+            >
+              Retirer du panier
+            </button>
+          </div>
+
+          <strong class="prix">{{ livre.prix.toFixed(2) }} €</strong>
+        </article>
+      }
+
+      <button class="vider" type="button" (click)="panier.vider()">
+        Vider ma sélection
+      </button>
+    </section>
+
+    <aside class="resume">
+      <span class="eyebrow">RÉCAPITULATIF</span>
+      <h2>Votre panier</h2>
+
+      <div class="ligne-resume">
+        <span>Livres sélectionnés</span>
+        <span>{{ panier.livres().length }}</span>
       </div>
 
-      <strong>{{ livre.prix | currency:'EUR':'symbol':'1.2-2' }}</strong>
+      <div class="total">
+        <span>Total</span>
+        <strong>{{ panier.total().toFixed(2) }} €</strong>
+      </div>
 
-      <button type="button" (click)="panier.retirer(livre.id)">
-        Retirer
-      </button>
-    </article>
-  }
+      <p class="note">
+        Votre sélection est sauvegardée dans ce navigateur.
+        Vous pourrez la retrouver à votre prochaine visite.
+      </p>
 
-  <p class="total">
-    Total : {{ panier.total() | currency:'EUR':'symbol':'1.2-2' }}
-  </p>
-
-  <button type="button" (click)="panier.vider()">
-    Vider le panier
-  </button>
+      <a class="bouton" routerLink="/">
+        Explorer la collection <span aria-hidden="true">↗</span>
+      </a>
+    </aside>
+  </div>
 } @else {
-  <p>Votre panier est vide.</p>
+  <section class="vide">
+    <div class="icone-vide" aria-hidden="true">P.</div>
+    <h2>Une nouvelle histoire vous attend.</h2>
+    <p>Votre panier est vide. Découvrez les livres de notre collection.</p>
+    <a class="bouton" routerLink="/">Trouver ma prochaine lecture ↗</a>
+  </section>
 }
-
-<p>
-  <a routerLink="/">Retour au catalogue</a>
-</p>

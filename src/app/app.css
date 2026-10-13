@@ -1,38 +1,161 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
 .entete {
+  border-bottom: 1px solid #ded8cd;
+  background: #f7f4ed;
+}
+
+.navigation {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 14px 24px;
-  background: #1b232d;
+  gap: 24px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 22px 32px;
 }
 
-.entete a {
-  color: #fff;
+.marque {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #203b39;
+  font: 600 1.4rem Georgia, serif;
   text-decoration: none;
 }
 
-.entete a:hover {
-  text-decoration: underline;
+.symbole {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 48px;
+  border: 1px solid #203b39;
+  border-radius: 3px;
+  font: 400 1.8rem Georgia, serif;
+}
+
+.sous-titre {
+  display: block;
+  margin-top: 5px;
+  color: #80613a;
+  font: 600 0.5rem system-ui, sans-serif;
+  letter-spacing: 0.19em;
+}
+
+.liens {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.liens a {
+  color: #203b39;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.liens a:hover {
+  color: #a16b3d;
+}
+
+.lien-panier {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid #ded8cd;
+  border-radius: 4px;
 }
 
 .compteur {
-  color: #fff;
+  display: grid;
+  place-items: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 5px;
+  border-radius: 50%;
+  background: #203b39;
+  color: white;
+  font-size: 0.7rem;
 }
 
-main {
-  max-width: 900px;
+.contenu {
+  max-width: 1120px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 0 32px 32px;
+}
+
+.pied-page {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px 32px;
+  border-top: 1px solid #ded8cd;
+  color: #77776e;
+  font-size: 0.7rem;
 }
 
 @media (max-width: 600px) {
-  .entete {
-    flex-wrap: wrap;
-    padding: 14px 16px;
+  .navigation {
+    gap: 12px;
+    padding: 18px 20px;
   }
 
-  main {
+  .marque {
+    font-size: 1.15rem;
+  }
+
+  .liens {
+    gap: 12px;
+  }
+
+  .lien-catalogue {
+    display: none;
+  }
+
+  .liens .lien-panier {
+    padding: 8px;
+    font-size: 0.75rem;
+  }
+
+  .contenu {
+    padding: 0 20px 24px;
+  }
+
+  .pied-page {
+    flex-direction: column;
+    padding: 20px;
+  }
+}
+@media (max-width: 430px) {
+  .navigation {
+    gap: 10px;
     padding: 16px;
+  }
+
+  .marque {
+    gap: 8px;
+    font-size: 1.05rem;
+  }
+
+  .symbole {
+    width: 36px;
+    height: 42px;
+    flex-shrink: 0;
+  }
+
+  .sous-titre {
+    font-size: 0.42rem;
+    letter-spacing: 0.1em;
+  }
+
+  .liens .lien-panier {
+    gap: 7px;
+    white-space: nowrap;
   }
 }

@@ -1,35 +1,77 @@
+<a class="retour" routerLink="/">← Retour à la collection</a>
+
 @if (catalogue.chargement()) {
-  <p>Chargement du livre…</p>
+  <p class="message" role="status">Chargement du livre…</p>
 } @else if (catalogue.erreur(); as message) {
-  <p>{{ message }}</p>
+  <p class="message" role="alert">{{ message }}</p>
 } @else if (livre(); as l) {
-  <div class="livre">
-    <div class="couv">{{ l.titre }}</div>
+  <section class="livre">
+    <div class="presentation">
+      <div class="couv">
+        <span class="edition">PLEINE PAGE · ÉDITIONS</span>
+        <h2>{{ l.titre }}</h2>
+        <div class="motif" aria-hidden="true"></div>
+        <span class="signature-auteur">{{ l.auteur }}</span>
+      </div>
+    </div>
 
     <div class="infos">
+      <span class="eyebrow">DANS NOTRE COLLECTION</span>
       <h1>{{ l.titre }}</h1>
-      <p>par {{ l.auteur }}</p>
-      <p class="prix">{{ l.prix }} €</p>
+      <p class="auteur">par {{ l.auteur }}</p>
+
+      <div class="separateur"></div>
+
+      <p class="invitation">
+        Votre prochaine lecture commence ici.
+        Faites une place à ce livre dans votre sélection.
+      </p>
+
+      <p class="prix">{{ l.prix.toFixed(2) }} <span>€</span></p>
 
       <button
         type="button"
         [disabled]="ajoute()"
         (click)="ajouter()"
       >
-        {{ ajoute() ? 'Ajouté' : 'Ajouter au panier' }}
+        {{ ajoute() ? '✓ Ajouté au panier' : 'Ajouter au panier' }}
+        @if (!ajoute()) {
+          <span aria-hidden="true">↗</span>
+        }
       </button>
+
+      @if (ajoute()) {
+        <a class="voir-panier" routerLink="/panier">
+          Voir mon panier →
+        </a>
+      }
+
+      <p class="note">Votre sélection est sauvegardée dans ce navigateur.</p>
     </div>
-  </div>
+  </section>
 
-  <h2>Vous aimerez aussi</h2>
+  <section class="recommandations">
+    <span class="eyebrow">POURSUIVRE LA DÉCOUVERTE</span>
+    <h2>Vous aimerez aussi.</h2>
 
-  <div class="suggestions">
-    @for (s of suggestions(); track s.id) {
-      <a [routerLink]="['/livre', s.id]">
-        {{ s.titre }}
-      </a>
-    }
-  </div>
+    <div class="suggestions">
+      @for (s of suggestions(); track s.id) {
+        <a [routerLink]="['/livre', s.id]">
+          <div class="mini-couverture" aria-hidden="true">
+            <span>{{ s.titre }}</span>
+            <div class="mini-motif"></div>
+          </div>
+
+          <span class="suggestion-auteur">{{ s.auteur }}</span>
+          <h3>{{ s.titre }}</h3>
+          <span class="suggestion-prix">{{ s.prix.toFixed(2) }} €</span>
+        </a>
+      }
+    </div>
+  </section>
 } @else {
-  <p>Ce livre n'existe pas.</p>
+  <div class="message">
+    <h1>Livre introuvable</h1>
+    <p>Ce livre ne fait pas partie de notre collection.</p>
+  </div>
 }

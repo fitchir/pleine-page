@@ -1,17 +1,117 @@
-<h1>Catalogue</h1>
+<section class="hero">
+  <div class="hero-contenu">
+    <span class="eyebrow">LA LIBRAIRIE DES ESPRITS CURIEUX</span>
 
-<input
-  placeholder="Filtrer par auteur"
-  (input)="filtre.set($any($event.target).value)"
->
+    <h1>Une page.<br>Un autre <em>monde.</em></h1>
 
-<p>{{ resultats().length }} livre(s)</p>
+    <p>
+      Des histoires pour s’évader, des voix à découvrir.
+      Trouvez le livre qui vous accompagnera.
+    </p>
 
-<ul>
-  @for (l of resultats(); track l.id) {
-    <li>
-        <a [routerLink]="['/livre', l.id]">{{ l.titre }}</a>,
-        {{ l.auteur }}, {{ l.prix }} €
-    </li>
+    <a class="bouton-principal" href="#selection">
+      Explorer la collection <span aria-hidden="true">↗</span>
+    </a>
+
+    <div class="hero-note">
+      Une sélection à découvrir, une histoire à emporter.
+    </div>
+  </div>
+
+  <div class="hero-visuel" aria-hidden="true">
+    <div class="halo"></div>
+
+    <div class="livre-decor livre-arriere">
+      <span>PLEINE PAGE</span>
+      <strong>Les clairs<br>carnets</strong>
+      <div class="motif-decor"></div>
+      <small>Awa Ferrand</small>
+    </div>
+
+    <div class="livre-decor livre-avant">
+      <span>PLEINE PAGE</span>
+      <strong>Les lointains<br>veilleurs</strong>
+      <div class="motif-decor"></div>
+      <small>Yann Ferrand</small>
+    </div>
+
+    <span class="annotation">Votre prochaine évasion</span>
+  </div>
+</section>
+
+<section id="selection" class="collection">
+  <div class="collection-entete">
+    <div>
+      <span class="eyebrow">LA COLLECTION</span>
+      <h2>Des livres, des rencontres.</h2>
+    </div>
+
+    <span class="nombre">{{ resultats().length }} ouvrages</span>
+  </div>
+
+  <div class="recherche">
+    <label for="filtre-auteur">Un auteur en tête ?</label>
+
+    <div class="champ-recherche">
+      <span aria-hidden="true">⌕</span>
+      <input
+        id="filtre-auteur"
+        type="search"
+        placeholder="Rechercher par auteur…"
+        [value]="filtre()"
+        (input)="filtre.set($any($event.target).value)"
+      >
+    </div>
+  </div>
+
+  @if (catalogue.chargement()) {
+    <p class="message" role="status">La collection arrive…</p>
+  } @else if (catalogue.erreur(); as message) {
+    <p class="message" role="alert">{{ message }}</p>
+  } @else {
+    <div class="grille">
+      @for (l of resultats(); track l.id) {
+        <a class="carte-livre" [routerLink]="['/livre', l.id]">
+          <div class="zone-couverture">
+            <div class="couverture">
+              <span class="edition">PLEINE PAGE · ÉDITIONS</span>
+              <h3>{{ l.titre }}</h3>
+              <div class="motif" aria-hidden="true"></div>
+              <span class="auteur-couverture">{{ l.auteur }}</span>
+            </div>
+
+            <span class="decouvrir" aria-hidden="true">Découvrir ↗</span>
+          </div>
+
+          <div class="details-livre">
+            <span class="auteur">{{ l.auteur }}</span>
+            <h3>{{ l.titre }}</h3>
+
+            <div class="bas-carte">
+              <span class="prix">{{ l.prix.toFixed(2) }} €</span>
+              <span class="voir">Voir le livre <span aria-hidden="true">↗</span></span>
+            </div>
+          </div>
+        </a>
+      } @empty {
+        <div class="message">
+          <h3>Aucun auteur trouvé</h3>
+          <p>Essayez un autre nom pour découvrir notre collection.</p>
+          <button
+            class="bouton-principal"
+            type="button"
+            (click)="filtre.set('')"
+          >
+            Afficher tous les livres
+          </button>
+        </div>
+      }
+    </div>
   }
-</ul>
+</section>
+
+<section class="signature">
+  <span class="eyebrow">PRENEZ LE TEMPS DE LIRE</span>
+  <p>Les plus beaux voyages<br>commencent par une <em>page.</em></p>
+  <span class="signature-marque">PLEINE PAGE</span>
+</section>

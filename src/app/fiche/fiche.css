@@ -1,46 +1,303 @@
+:host {
+  display: block;
+  padding-top: 30px;
+}
+
+.retour {
+  display: inline-block;
+  margin-bottom: 32px;
+  color: #6b6b68;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.retour:hover,
+.voir-panier:hover {
+  color: #a16b3d;
+  text-decoration: underline;
+}
+
 .livre {
-  display: flex;
-  gap: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 64px;
+  padding-bottom: 56px;
+}
+
+.presentation {
+  display: grid;
+  place-items: center;
+  min-height: 460px;
+  padding: 40px;
+  border-radius: 8px;
+  background: #ebe7de;
 }
 
 .couv {
-  width: 180px;
-  height: 260px;
-  background: #8a4a24;
-  color: #fff;
-  padding: 16px;
-  box-sizing: border-box;
-  font-family: Georgia, serif;
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  min-height: 340px;
+  padding: 30px 26px;
+  border-radius: 2px 7px 7px 2px;
+  background: #203b39;
+  color: #f6e8cc;
+  box-shadow:
+    inset 7px 0 0 #00000018,
+    16px 22px 30px #203b3930;
+  transform: rotate(-6deg);
+}
+
+.edition {
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+}
+
+.couv h2 {
+  margin: 32px 0 20px;
+  font: 400 2.2rem/1.15 Georgia, serif;
+}
+
+.motif {
+  width: 115px;
+  height: 115px;
+  margin: auto;
+  border: 1px solid currentColor;
+  border-radius: 50% 50% 0 0;
+  opacity: 0.55;
+  transform: rotate(15deg);
+}
+
+.signature-auteur {
+  margin-top: 24px;
+  font-size: 0.75rem;
+  letter-spacing: 0.07em;
+}
+
+.eyebrow {
+  color: #80613a;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+}
+
+h1 {
+  margin: 18px 0;
+  font: 400 clamp(2.3rem, 4vw, 3.6rem)/1.1 Georgia, serif;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+
+.auteur {
+  color: #6b6b68;
+  font-size: 1rem;
+}
+
+.separateur {
+  width: 56px;
+  height: 1px;
+  margin: 28px 0;
+  background: #a16b3d;
+}
+
+.invitation {
+  max-width: 360px;
+  color: #6b6b68;
+  font-size: 0.9rem;
+  line-height: 1.8;
 }
 
 .prix {
-  color: #b8541f;
-  font-size: 22px;
-  font-weight: bold;
+  margin: 26px 0;
+  color: #203b39;
+  font: 400 2.1rem Georgia, serif;
+}
+
+.prix span {
+  font-size: 1.3rem;
 }
 
 button {
-  background: #0b63a6;
-  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  width: 100%;
+  max-width: 350px;
+  padding: 17px 22px;
   border: 0;
-  padding: 10px 18px;
-  font-size: 16px;
+  border-radius: 4px;
+  background: #203b39;
+  color: white;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 180ms, transform 180ms;
+}
+
+button:hover:not(:disabled) {
+  background: #31534f;
+  transform: translateY(-2px);
 }
 
 button:disabled {
-  background: #6b7684;
+  background: #e2e8df;
+  color: #203b39;
+  cursor: default;
+}
+
+.voir-panier {
+  display: inline-block;
+  margin-top: 18px;
+  color: #203b39;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.note {
+  margin-top: 18px;
+  color: #77776e;
+  font-size: 0.7rem;
+  line-height: 1.6;
+}
+
+.recommandations {
+  padding: 40px 0;
+  border-top: 1px solid #ded8cd;
+}
+
+.recommandations > h2 {
+  margin: 12px 0 30px;
+  font: 400 2rem Georgia, serif;
+  letter-spacing: -0.03em;
 }
 
 .suggestions {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
 }
 
 .suggestions a {
-  background: #e7e1d6;
-  padding: 12px;
-  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  min-width: 0;
   color: inherit;
   text-decoration: none;
+}
+
+.mini-couverture {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 200px;
+  margin-bottom: 16px;
+  padding: 24px;
+  border-radius: 4px;
+  background: #b56e48;
+  color: #fff0da;
+  transition: transform 200ms;
+}
+
+.mini-couverture > span {
+  font: 400 1.5rem/1.15 Georgia, serif;
+}
+
+.suggestions a:nth-child(2) .mini-couverture {
+  background: #303f5a;
+}
+
+.suggestions a:nth-child(3) .mini-couverture {
+  background: #745064;
+}
+
+.suggestions a:nth-child(4) .mini-couverture {
+  background: #203b39;
+}
+
+.mini-motif {
+  width: 58px;
+  height: 58px;
+  margin: 20px auto 0;
+  border: 1px solid currentColor;
+  border-radius: 50% 50% 0 0;
+  opacity: 0.55;
+}
+
+.suggestions a:hover .mini-couverture,
+.suggestions a:focus-visible .mini-couverture {
+  transform: translateY(-5px);
+}
+
+.suggestion-auteur {
+  color: #6b6b68;
+  font-size: 0.7rem;
+}
+
+.suggestions h3 {
+  margin: 8px 0 12px;
+  font: 400 1.15rem Georgia, serif;
+}
+
+.suggestion-prix {
+  margin-top: auto;
+  color: #203b39;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.message {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .livre {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .presentation {
+    min-height: 420px;
+  }
+
+  .suggestions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .presentation {
+    min-height: 370px;
+    padding: 30px 20px;
+  }
+
+  .couv {
+    width: 205px;
+    min-height: 300px;
+  }
+
+  .couv h2 {
+    font-size: 1.85rem;
+  }
+
+  .mini-couverture {
+    min-height: 180px;
+    padding: 16px;
+  }
+
+  .mini-couverture > span {
+    font-size: 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button,
+  .mini-couverture {
+    transition: none;
+  }
 }

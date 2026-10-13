@@ -1,0 +1,45 @@
+.page-erreur {
+  padding: 70px 20px;
+  text-align: center;
+}
+
+.eyebrow {
+  color: #80613a;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+}
+
+.numero {
+  margin: 20px 0;
+  color: #203b39;
+  font: 400 clamp(6rem, 18vw, 11rem)/1 Georgia, serif;
+  letter-spacing: -0.08em;
+}
+
+h1 {
+  margin: 24px 0;
+  font: 400 clamp(1.8rem, 4vw, 3rem) Georgia, serif;
+  letter-spacing: -0.04em;
+}
+
+p {
+  max-width: 430px;
+  margin: 0 auto 30px;
+  color: #6b6b68;
+  line-height: 1.8;
+}
+
+a {
+  display: inline-block;
+  padding: 16px 24px;
+  border-radius: 4px;
+  background: #203b39;
+  color: white;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+a:hover {
+  background: #31534f;
+}
